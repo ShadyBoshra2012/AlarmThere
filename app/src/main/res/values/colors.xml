@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#302c5f</color>
+    <color name="colorPrimaryDark">#211e48</color>
+    <color name="primaryLight">#413f8e</color>
+    <color name="colorAccent">#a248ff</color>
+    <color name="colorAccentDisable">#e3c7ff</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="textColorSecondary">#c0cbf6</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="actionBarDivider">#BDBDBD</color>
+
+    <!-- Marker Colors -->
+    <color name="RedMarker">#B71C1C</color>
+    <color name="AzureMarker">#007FFF</color>
+    <color name="BlueMarker">#0D47A1</color>
+    <color name="CyanMarker">#7FFFD4</color>
+    <color name="GreenMarker">#1B5E20</color>
+    <color name="MagentaMarker">#FF00FF</color>
+    <color name="OrangeMarker">#E65100</color>
+    <color name="RoseMarker">#EF597B</color>
+    <color name="VioletMarker">#8A2BE2</color>
+    <color name="YellowMarker">#FFFF00</color>
+</resources>

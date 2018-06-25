@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="units_array">
+        <item name="unit_meters">@string/unit_meters</item>
+        <item name="unit_kilo_meters">@string/unit_kilo_meters</item>
+        <item name="unit_mile">@string/unit_mile</item>
+    </string-array>
+</resources>

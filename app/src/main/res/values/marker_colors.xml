@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="marker_colors_array">
+        <item name="RedMarker">@string/RedMarker</item>
+        <item name="AzureMarker">@string/AzureMarker</item>
+        <item name="BlueMarker">@string/BlueMarker</item>
+        <item name="CyanMarker">@string/CyanMarker</item>
+        <item name="GreenMarker">@string/GreenMarker</item>
+        <item name="MagentaMarker">@string/MagentaMarker</item>
+        <item name="OrangeMarker">@string/OrangeMarker</item>
+        <item name="RoseMarker">@string/RoseMarker</item>
+        <item name="VioletMarker">@string/VioletMarker</item>
+        <item name="YellowMarker">@string/YellowMarker</item>
+    </string-array>
+</resources>

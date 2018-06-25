@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Alarm</string>
+    <string name="app_version">نسخة 1.0.3</string>
+    <string name="rate_app_title">قيم تطبيقنا</string>
+    <string name="rate_app_message">إذا اعجبك تطبيقنا، من فضلك قيم التطبيق في المتجر.</string>
+    <string name="dialog_app_rate">قيم التطبيق</string>
+    <string name="dialog_ask_later">لاحقاً</string>
+    <string name="dialog_your_feedback">ارسل تعليقك</string>
+    <string name="alert_view_you_have_arrived">لقد وصلت.</string>
+    <string name="alert_view_dismiss">إيقاف</string>
+    <string name="alert_view_snoozed">غفوة (<xliff:g example="1000" id="range">%s</xliff:g> <xliff:g example="متر" id="unit">%s</xliff:g>)</string>
+    <string name="subtitletitle_activity_main">المنبهات</string>
+    <string name="main_activity_no_location_alarms">لا يوجد منبهات بحسب الموقع</string>
+    <string name="main_activity_create_alarm">لم يتم ايجاد منبهات بحسب الموقع. ضع منبه جديد عن طريق الضغط على الزر + .</string>
+    <string name="location_dialog_title">الموقع مغلق</string>
+    <string name="location_dialog_message">التطبيق يحتاج إلى إيجاد موقعك، من فضلك قم بتشغيل الموقع.</string>
+    <string name="location_dialog_turn_on">تشغيل الموقع</string>
+    <string name="location_dialog_cancel">إلغاء</string>
+    <string name="delete_dialog_title">تاكيد الحذف</string>
+    <string name="delete_dialog_message">هل تريد حقاً حذف هذا المنبه ؟</string>
+    <string name="delete_dialog_delete">حذف</string>
+    <string name="delete_dialog_cancel">إلغاء</string>
+    <string name="range_text_view">على نطاق <xliff:g example="1000 متر" id="range">%s</xliff:g></string>
+    <string name="snoozed_range_text_view">غفوة إلى نطاق <xliff:g example="1000 متر" id="range">%s</xliff:g></string>
+    <string name="distance_text_view">المسافة حتى الوصول <xliff:g example="2 كيلو متر" id="distance">%s</xliff:g></string>
+    <string name="create_own_location">حدد اسم مكانك</string>
+    <string name="no_internet_message">نأسف. لا يوجد اتصال بالانترنت، يتعذر جلب معلومات الموقع.</string>
+    <string name="no_places_message">لا يوجد مواقع في محيط 200 متر!!\nمن فضلك قم باختيار موقع اخر.</string>
+    <string name="pick_place">من فضلك اختر الموقع.</string>
+    <string name="range_distance">من فضلك حدد النطاق.</string>
+    <string name="range_distance_number">
+    <xliff:g example="2200" id="rangeByMeter">%s</xliff:g>
+    متر\n
+    <xliff:g example="2.2" id="rangeByKiloMeter">%s</xliff:g>
+    كيلو متر\n
+    <xliff:g example="1.36702" id="rangeByMile">%s</xliff:g>
+        ميل</string>
+    <string name="action_alarms">المنبهات</string>
+    <string name="action_show_on_maps">عرض المنبهات على الخريطة</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="action_rate_app">قيم تطبيقنا</string>
+    <string name="action_send_feedback_app">ارسل تعليقاتك</string>
+    <string name="action_info">معلومات</string>
+    <string name="custom_range_distance">النطاق</string>
+    <string name="custom_range_distance_minimum_range_error">لا يمكنك تحديد النطاق اقل من <xliff:g example="100" id="defaultMinRange">%s</xliff:g> <xliff:g example="متر" id="unit">%s</xliff:g>.</string>
+    <string name="custom_range_distance_maximum_range_error">لا يمكنك تحديد النطاق اكثر من <xliff:g example="50000" id="defaultMaxRange">%s</xliff:g> <xliff:g example="متر" id="unit">%s</xliff:g>.</string>
+    <string name="custom_range_please_set_range">من فضلك حدد النطاق.</string>
+    <string name="action_edit">تعديل</string>
+    <string name="action_delete">حذف</string>
+    <string name="message_location_name_title">اسم المنبه</string>
+    <string name="message_location_name_cancel_button">إلغاء</string>
+    <string name="subtitletitle_edit_activity">تعديل المنبه - <xliff:g example="Test" id="AlarmNAme">%s</xliff:g></string>
+    <string name="edit_activity_save">حفظ</string>
+    <string name="edit_activity_alarm_name">اسم المنبه</string>
+    <string name="edit_activity_location_name">اسم المكان</string>
+    <string name="edit_activity_range_distance">النطاق</string>
+    <string name="edit_activity_vicinity">اماكن مجاورة</string>
+    <string name="edit_activity_marker_color">لون العلامة</string>
+    <string name="edit_activity_must_alarm_name">يجب عليك وضع اسم المنبه.</string>
+    <string name="edit_activity_must_range_distance">يجب عليك تحديد النطاق.</string>
+    <string name="RedMarker">أحمر</string>
+    <string name="AzureMarker">أزرق سماوي</string>
+    <string name="BlueMarker">أزرق</string>
+    <string name="CyanMarker">أزرق مخضر</string>
+    <string name="GreenMarker">اخضر</string>
+    <string name="MagentaMarker">أرجواني</string>
+    <string name="OrangeMarker">برتقالي</string>
+    <string name="RoseMarker">وردي</string>
+    <string name="VioletMarker">بنفسجي</string>
+    <string name="YellowMarker">أصفر</string>
+    <string name="unit_meters">متر</string>
+    <string name="unit_kilo_meters">كيلو متر</string>
+    <string name="unit_mile">ميل</string>
+    <string name="subtitletitle_show_alarms_map_activity">عرض المنبهات على الخريطة</string>
+    <string name="subtitletitle_info_activity">معلومات</string>
+    <string name="info_activity_developed_by">تم التطوير بواسطة</string>
+    <string name="info_activity_shady_boshra">Shady Boshra</string>
+    <string name="info_activity_feedback">تعليقك دائماً يهمنا</string>
+    <string name="message_location_name_ok_button">موافق</string>
+</resources>

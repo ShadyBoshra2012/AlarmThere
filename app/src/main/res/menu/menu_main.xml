@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.shadyboshra2012.android.alarmthere.MainActivity">
+    <item
+        android:id="@+id/action_alarms"
+        android:title="@string/action_alarms" />
+    <item
+        android:id="@+id/action_show_on_maps"
+        android:title="@string/action_show_on_maps" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_rate_app"
+        android:title="@string/action_rate_app" />
+    <item
+        android:id="@+id/action_send_feedback_app"
+        android:title="@string/action_send_feedback_app" />
+    <item
+        android:id="@+id/action_info"
+        android:title="@string/action_info" />
+</menu>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">AlarmThere</string>
+    <string name="app_version">V 1.0.3</string>
+
+    <string name="action_alarms">Alarms</string>
+    <string name="action_show_on_maps">Show Alarms on Map</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_rate_app">Rate our App</string>
+    <string name="action_send_feedback_app">Send Feedback</string>
+    <string name="action_info">Info</string>
+
+    <string name="rate_app_title">Rate our App</string>
+    <string name="rate_app_message">If you like our app, please take a moment to rate it in play store!</string>
+    <string name="dialog_app_rate">Rate App</string>
+    <string name="dialog_ask_later">Later</string>
+    <string name="dialog_your_feedback">Your Feedback</string>
+
+    <string name="alert_view_you_have_arrived">You have Arrived.</string>
+    <string name="alert_view_dismiss">Dismiss</string>
+    <string name="alert_view_snoozed">Snooze (<xliff:g example="1000" id="range">%s</xliff:g> <xliff:g example="Meters" id="unit">%s</xliff:g>)</string>
+
+    <string name="subtitletitle_activity_main">Alarms</string>
+    <string name="main_activity_no_location_alarms">No Location Alarms</string>
+    <string name="main_activity_create_alarm">No created location alarm. Create a new location alarm by tapping the + button.</string>
+
+    <string name="location_dialog_title">Location is Off</string>
+    <string name="location_dialog_message">Application need to find your location, please turn on Location.</string>
+    <string name="location_dialog_turn_on">Turn on Location</string>
+    <string name="location_dialog_cancel">Cancel</string>
+
+    <string name="delete_dialog_title">Confirm Delete</string>
+    <string name="delete_dialog_message">Do you really want to delete this Location Alarm ?</string>
+    <string name="delete_dialog_delete">Delete</string>
+    <string name="delete_dialog_cancel">Cancel</string>
+
+    <string name="range_text_view">At range of <xliff:g example="1000 m" id="range">%s</xliff:g></string>
+    <string name="snoozed_range_text_view">Snoozed to range <xliff:g example="1000 m" id="range">%s</xliff:g></string>
+    <string name="distance_text_view">Distance to arraive <xliff:g example="2 Km" id="distance">%s</xliff:g></string>
+
+    <string name="create_own_location">Create own Location</string>
+    <string name="no_internet_message">Sorry, no internet connection, cannot get places.</string>
+    <string name="no_places_message">No places found in 200 Meters radius!!\nPlase pin another location.</string>
+    <string name="pick_place">Please pick a place.</string>
+    <string name="range_distance">Please set the range.</string>
+    <string name="range_distance_number"><xliff:g example="2200" id="rangeByMeter">%s</xliff:g> m\n
+                                        <xliff:g example="2.2" id="rangeByKiloMeter">%s</xliff:g> Km\n
+                                        <xliff:g example="1.36702" id="rangeByMile">%s</xliff:g> Mile
+    </string>
+    <string name="custom_range_distance">Range Distance</string>
+    <string name="custom_range_distance_minimum_range_error">You can\'t set range less than <xliff:g example="100" id="defaultMinRange">%s</xliff:g> <xliff:g example="Meters" id="unit">%s</xliff:g>.</string>
+    <string name="custom_range_distance_maximum_range_error">You can\'t set range more than <xliff:g example="50000" id="defaultMaxRange">%s</xliff:g> <xliff:g example="Meters" id="unit">%s</xliff:g>.</string>
+    <string name="custom_range_please_set_range">Please set decimal range.</string>
+
+
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="message_location_name_title">Alarm Name</string>
+    <string name="message_location_name_ok_button">OK</string>
+    <string name="message_location_name_cancel_button">Cancel</string>
+
+    <string name="subtitletitle_edit_activity">Edit Alarm - <xliff:g example="Test" id="AlarmNAme">%s</xliff:g></string>
+    <string name="edit_activity_save">Save</string>
+    <string name="edit_activity_alarm_name">Alarm Name</string>
+    <string name="edit_activity_location_name">Location Name</string>
+    <string name="edit_activity_range_distance">Range Distance</string>
+    <string name="edit_activity_vicinity">Vicinity</string>
+    <string name="edit_activity_marker_color">Marker Color</string>
+
+    <string name="edit_activity_must_alarm_name">You have to set Alarm Name.</string>
+    <string name="edit_activity_must_range_distance">You have to set Range Distance.</string>
+
+    <string name="RedMarker">Red</string>
+    <string name="AzureMarker">Azure</string>
+    <string name="BlueMarker">Blue</string>
+    <string name="CyanMarker">Cyan</string>
+    <string name="GreenMarker">Green</string>
+    <string name="MagentaMarker">Magenta</string>
+    <string name="OrangeMarker">Orange</string>
+    <string name="RoseMarker">Rose</string>
+    <string name="VioletMarker">Violet</string>
+    <string name="YellowMarker">Yellow</string>
+
+    <string name="unit_meters">Meters</string>
+    <string name="unit_kilo_meters">Km</string>
+    <string name="unit_mile">Mile</string>
+
+    <string name="subtitletitle_show_alarms_map_activity">Show Alarms on Map</string>
+
+    <string name="subtitletitle_info_activity">Info</string>
+    <string name="info_activity_developed_by">Developed By</string>
+    <string name="info_activity_shady_boshra">Shady Boshra</string>
+    <string name="info_activity_feedback">Your Feedback always Matter</string>
+
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3320602227796002/2465036579</string>
+    <!-- Test <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string> -->
+     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3320602227796002/2468566696</string>
+    <!-- Test <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string> -->
+ </resources>
