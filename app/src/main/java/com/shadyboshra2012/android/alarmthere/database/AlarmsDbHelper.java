@@ -15,8 +15,8 @@ import java.util.Date;
 
 public class AlarmsDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "alarms.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "alarms.db";
 
     private static final String SQL_CREATE_Alarms =
             "CREATE TABLE " + AlarmsContract.Alarms.TABLE_NAME + " (" +
@@ -128,7 +128,7 @@ public class AlarmsDbHelper extends SQLiteOpenHelper {
                 sortOrder               // The sort order
         );
 
-        ArrayList<Alarm> Alarms = new ArrayList();
+        ArrayList<Alarm> Alarms = new ArrayList<Alarm>();
 
         while (cursor.moveToNext()) {
             Alarm a = new Alarm();

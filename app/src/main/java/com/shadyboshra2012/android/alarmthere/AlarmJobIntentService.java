@@ -1,10 +1,8 @@
 package com.shadyboshra2012.android.alarmthere;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.app.job.JobParameters;
-import android.app.job.JobService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +17,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +25,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
+
 import com.shadyboshra2012.android.alarmthere.database.AlarmsDbHelper;
 
 import java.util.ArrayList;
 
-@TargetApi(21)
-public class AlarmJobService extends JobService {
-
-    private static final String TAG = AlarmJobService.class.getSimpleName();
-    boolean isWorking = false;
-    boolean jobCancelled = false;
+public class AlarmJobIntentService extends JobIntentService {
+    /* Give the Job a Unique Id */
+    private static final int JOB_ID = 1000;
 
     private LocationManager mLocationManager = null;
     private static final int LOCATION_INTERVAL = 1000;
@@ -113,7 +110,7 @@ public class AlarmJobService extends JobService {
             kl.disableKeyguard();
 
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP
+            @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP
                     | PowerManager.ON_AFTER_RELEASE, "MyWakeLock");
             wakeLock.acquire();
 
@@ -216,38 +213,18 @@ public class AlarmJobService extends JobService {
         }
     }
 
-    LocationListener[] mLocationListeners = new LocationListener[]{
-            new LocationListener(LocationManager.GPS_PROVIDER),
-            new LocationListener(LocationManager.NETWORK_PROVIDER)
+    AlarmJobIntentService.LocationListener[] mLocationListeners = new AlarmJobIntentService.LocationListener[]{
+            new AlarmJobIntentService.LocationListener(LocationManager.GPS_PROVIDER),
+            new AlarmJobIntentService.LocationListener(LocationManager.NETWORK_PROVIDER)
     };
 
-    // Called by the Android system when it's time to run the job
+    public static void enqueueWork(Context ctx, Intent intent) {
+        enqueueWork(ctx, AlarmJobIntentService.class, JOB_ID, intent);
+    }
+
     @Override
-    public boolean onStartJob(JobParameters jobParameters) {
-       //Log.d(TAG, "Job started!");
-        isWorking = true;
-        // We need 'jobParameters' so we can call 'jobFinished'
-        startWorkOnNewThread(jobParameters); // Services do NOT run on a separate thread
-
-        return isWorking;
-    }
-
-    private void startWorkOnNewThread(final JobParameters jobParameters) {
-        new Thread(new Runnable() {
-            public void run() {
-                //doWork(jobParameters);
-                AlarmReceiver.setContext(getApplicationContext());
-                AlarmReceiver.setAlarm(true);
-
-                isWorking = false;
-                boolean needsReschedule = true;
-                jobFinished(jobParameters, needsReschedule);
-            }
-        }).start();
-    }
-
-    private void doWork(JobParameters jobParameters) {
-        // 10 seconds of working (1000*10ms)
+    protected void onHandleWork(@NonNull Intent intent) {
+        /* your code here */
         try {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(new Runnable() {
@@ -286,22 +263,12 @@ public class AlarmJobService extends JobService {
 
         } catch (Exception e) {
         }
-
-       //Log.d(TAG, "Job finished!");
-        isWorking = false;
-        boolean needsReschedule = true;
-        jobFinished(jobParameters, needsReschedule);
+        /* reset the alarm */
+        AlarmReceiver.setContext(getApplicationContext());
+        AlarmReceiver.setAlarm(false);
+        stopSelf();
     }
 
-    // Called if the job was cancelled before being finished
-    @Override
-    public boolean onStopJob(JobParameters jobParameters) {
-       //Log.d(TAG, "Job cancelled before being completed.");
-        jobCancelled = true;
-        boolean needsReschedule = isWorking;
-        jobFinished(jobParameters, needsReschedule);
-        return needsReschedule;
-    }
 
     private void initializeLocationManager() {
         //Log.e(TAG, "initializeLocationManager");
@@ -340,6 +307,7 @@ public class AlarmJobService extends JobService {
                 mAlarms.addAll(mDbHelper.getAlarms(mDbHelper, null, null, null));
             }
         };
+        unregisterReceiver(updateUIReciver);
         registerReceiver(updateUIReciver, filter);
     }
 }

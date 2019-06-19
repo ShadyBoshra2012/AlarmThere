@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">AlarmThere</string>
-    <string name="app_version">V 1.0.3</string>
+    <string name="app_version">V 1.0.6 (6)</string>
 
     <string name="action_alarms">Alarms</string>
     <string name="action_show_on_maps">Show Alarms on Map</string>
@@ -100,5 +100,6 @@
     <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3320602227796002/2465036579</string>
     <!-- Test <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string> -->
      <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3320602227796002/2468566696</string>
+    <string name="main_activity_warning_message">You must keep application running or it will NOT work probably.</string>
     <!-- Test <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string> -->
  </resources>

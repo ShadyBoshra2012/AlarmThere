@@ -137,7 +137,7 @@
                 android:textColor="@color/colorAccentDisable"
                 android:textSize="22sp" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/nav_next_btn"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
@@ -181,7 +181,7 @@
                 android:textColor="@color/colorAccentDisable"
                 android:textSize="16sp" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/nav_set_alarm_btn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -210,7 +210,7 @@
                 android:textColor="@color/textColorPrimary"
                 android:textSize="16sp" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/increament_btn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -219,7 +219,7 @@
                 android:focusable="false"
                 android:src="@drawable/ic_increament_range" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/decreament_btn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -228,14 +228,14 @@
                 android:focusable="false"
                 android:src="@drawable/ic_decreament_range" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/edit_btn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="@dimen/bottom_bar_button_margin"
                 android:clickable="false"
                 android:focusable="false"
-                android:src="@drawable/ic_edit_range" />
+                android:src="@drawable/ic_edit_range"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Alarm</string>
-    <string name="app_version">نسخة 1.0.3</string>
+    <string name="app_name">التنبيه هناك</string>
+    <string name="app_version">نسخة 1.0.5</string>
     <string name="rate_app_title">قيم تطبيقنا</string>
     <string name="rate_app_message">إذا اعجبك تطبيقنا، من فضلك قيم التطبيق في المتجر.</string>
     <string name="dialog_app_rate">قيم التطبيق</string>
@@ -78,4 +78,5 @@
     <string name="info_activity_shady_boshra">Shady Boshra</string>
     <string name="info_activity_feedback">تعليقك دائماً يهمنا</string>
     <string name="message_location_name_ok_button">موافق</string>
+    <string name="main_activity_warning_message">يجب الاستمرار في تشغيل التطبيق وإلا فلن يعمل على الأرجح.</string>
 </resources>

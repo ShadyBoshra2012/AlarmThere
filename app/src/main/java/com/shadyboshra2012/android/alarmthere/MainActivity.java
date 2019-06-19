@@ -1,43 +1,43 @@
 package com.shadyboshra2012.android.alarmthere;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.shadyboshra2012.android.alarmthere.database.AlarmsDbHelper;
 import com.shadyboshra2012.android.alarmthere.drawer_activities.InfoActivity;
 import com.shadyboshra2012.android.alarmthere.drawer_activities.SettingsActivity;
@@ -74,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
     private static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
     private static final int PICK_MAP_POINT_REQUEST = 999;  // The request code
     private static final int JOP_ID = 8898;
+    @BindView(R.id.warning_message_layout)
+    LinearLayout warningMessageLayout;
     private Intent AlarmServiceIntent;
+    private Intent AlarmReceiverIntent;
     private JobInfo jobInfo;
     private JobScheduler jobScheduler;
     private BroadcastReceiver updateUIReciver;
@@ -83,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOCATION_INTERVAL = 1000;
     private static final float LOCATION_DISTANCE = 10f;
 
-    private ArrayList<Alarm> mAlarms = new ArrayList<Alarm>();
-    private AlarmAdapter mAlarmsAdapter;
+    private static ArrayList<Alarm> mAlarms = new ArrayList<Alarm>();
+    private static AlarmAdapter mAlarmsAdapter;
     private AlarmsDbHelper mDbHelper;
 
     private Snackbar locationSnackBar;
@@ -96,13 +99,16 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (Build.VERSION.SDK_INT >= 26) {
-            ComponentName componentName = new ComponentName(this, AlarmJobService.class);
-            jobInfo = new JobInfo.Builder(JOP_ID, componentName).setMinimumLatency(60000).build();
-            jobScheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
+            /*ComponentName componentName = new ComponentName(this, AlarmJobService.class);
+            jobInfo = new JobInfo.Builder(JOP_ID, componentName).setMinimumLatency(60000).setPersisted(true).build();
+            jobScheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);*/
+            warningMessageLayout.setVisibility(View.VISIBLE);
+        } else {
+            warningMessageLayout.setVisibility(View.GONE);
         }
-        else{
-            AlarmServiceIntent = new Intent(this, AlarmService.class);
-        }
+
+        AlarmServiceIntent = new Intent(this, AlarmService.class);
+
 
         requestRuntimePermission();
         checkPermission();
@@ -158,7 +164,18 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mAlarms.clear();
         mAlarms.addAll(mDbHelper.getAlarms(mDbHelper, null, null, null));
-        mAlarmsAdapter.notifyDataSetChanged();
+
+        if(mAlarms.size() > 0){
+            warningMessageLayout.setVisibility(View.VISIBLE);
+        } else {
+            warningMessageLayout.setVisibility(View.GONE);
+        }
+
+        if (LocationListener.mLastLocation == null)
+            LocationListener.mLastLocation = new Location(LocationManager.GPS_PROVIDER);
+
+        if (mLocationManager != null)
+            LocationListener.getLastLocationKnown(mLocationManager);
 
         showLayout();
         AppPreferences.getInstance(getApplicationContext()).showAd();
@@ -242,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
             localIntent.setType("message/rfc822");
             paramContext.startActivity(Intent.createChooser(localIntent, "Choose an Email client :"));
         } catch (Exception e) {
-           //Log.d("OpenFeedback", e.getMessage());
+            //Log.d("OpenFeedback", e.getMessage());
         }
     }
 
@@ -402,7 +419,15 @@ public class MainActivity extends AppCompatActivity {
     private void startServiceAndLocation() {
         if (checkAlarmEnables()) {
             if (Build.VERSION.SDK_INT >= 26) {
-                jobScheduler.schedule(jobInfo);
+                /*int result = jobScheduler.schedule(jobInfo);
+                if(result == JobScheduler.RESULT_SUCCESS){
+                    Log.i("Jooob", "Done");
+                } else {
+                    Log.i("Jooob", "Fail");
+                }
+                AlarmReceiver.setContext(this);
+                AlarmReceiver.setAlarm(true); /* true will force the broadcast */
+                startForegroundService(AlarmServiceIntent);
             } else {
                 startService(AlarmServiceIntent);
             }
@@ -414,8 +439,11 @@ public class MainActivity extends AppCompatActivity {
             intializeLocationManger();
         } else {
             if (Build.VERSION.SDK_INT >= 26) {
-                jobScheduler.cancel(JOP_ID);
-            }else{
+                //jobScheduler.cancel(JOP_ID);
+                //AlarmReceiver.setContext(this);
+                //AlarmReceiver.cancelAlarm();
+                stopService(AlarmServiceIntent);
+            } else {
                 stopService(AlarmServiceIntent);
             }
 
@@ -516,8 +544,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class LocationListener implements android.location.LocationListener {
-        Location mLastLocation;
+    private static class LocationListener implements android.location.LocationListener {
+        public static Location mLastLocation;
 
         public LocationListener(String provider) {
             //Log.e(TAG, "LocationListener " + provider);
@@ -527,6 +555,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location location) {
             mLastLocation.set(location);
+
+            for (int i = 0; i < mAlarms.size(); i++) {
+                Alarm alarm = mAlarms.get(i);
+                alarm.userCurrentLatLng = mLastLocation;
+            }
+
+            mAlarmsAdapter.notifyDataSetChanged();
+        }
+
+        @SuppressLint("MissingPermission")
+        public static void getLastLocationKnown(LocationManager locationManager) {
+            mLastLocation.set(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER));
 
             for (int i = 0; i < mAlarms.size(); i++) {
                 Alarm alarm = mAlarms.get(i);

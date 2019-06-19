@@ -13,13 +13,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +25,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,6 +51,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.shadyboshra2012.android.alarmthere.Alarm;
 import com.shadyboshra2012.android.alarmthere.AppController;
 import com.shadyboshra2012.android.alarmthere.R;
@@ -68,7 +69,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.*;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.GEOMETRY;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.GOOGLE_BROWSER_API_KEY;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.ICON;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.ID;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.LATITUDE;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.LOCALE_LANGUAGE;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.LOCATION;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.LONGITUDE;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.NAME;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.OK;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.PLACE_ID;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.PROXIMITY_RADIUS;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.REFERENCE;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.STATUS;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.TAG;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.VICINITY;
+import static com.shadyboshra2012.android.alarmthere.newalarm.PlaceConfig.ZERO_RESULTS;
 
 public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -298,6 +315,8 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
         }
     }
 
+    private boolean isUserMoveMap = false;
+
     private void setCurrentLocationMarker() {
         if (myCurrentLocation != null)
             myCurrentLocation.remove();
@@ -307,7 +326,10 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
                 .title("You")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_current_location)));
 
-        if (selectedPlaceMarker == null)
+        /*if (selectedPlaceMarker == null)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15f));*/
+
+        if (!isUserMoveMap)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15f));
     }
 
@@ -386,7 +408,7 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0, 0), 30f));
         if (isGPSOn()) {
             setCurrentLocationMarker();
 
@@ -442,6 +464,13 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
                 } catch (Exception e) {
                     //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        mMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
+            @Override
+            public void onCameraMoveStarted(int i) {
+                isUserMoveMap = true;
             }
         });
     }
@@ -826,15 +855,15 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject result) {
-                       //Log.i(TAG, "onResponse: Result= " + result.toString());
+                        Log.i(TAG, "onResponse: Result= " + result.toString());
                         parseLocationResult(result);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       //Log.e(TAG, "onErrorResponse: Error= " + error);
-                       //Log.e(TAG, "onErrorResponse: Error= " + error.getMessage());
+                        Log.e(TAG, "onErrorResponse: Error= " + error);
+                        Log.e(TAG, "onErrorResponse: Error= " + error.getMessage());
                     }
                 });
 
@@ -852,8 +881,12 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
                     JSONObject place = jsonArray.getJSONObject(i);
 
                     PossibleLocation PL = new PossibleLocation();
-                    PL.setID(place.getString(ID));
-                    PL.setPlaceID(place.getString(PLACE_ID));
+
+                    if (!place.isNull(ID))
+                        PL.setID(place.getString(ID));
+
+                    if (!place.isNull(PLACE_ID))
+                        PL.setPlaceID(place.getString(PLACE_ID));
 
                     if (!place.isNull(NAME))
                         PL.setName(place.getString(NAME));
@@ -887,7 +920,7 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
 
         } catch (JSONException e) {
             e.printStackTrace();
-           //Log.e(TAG, "parseLocationResult: Error=" + e.getMessage());
+            Log.e(TAG, "parseLocationResult: Error=" + e.getMessage());
         }
     }
 }

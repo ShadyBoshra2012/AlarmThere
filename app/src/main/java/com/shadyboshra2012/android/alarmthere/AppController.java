@@ -1,7 +1,10 @@
 package com.shadyboshra2012.android.alarmthere;
 
-import android.support.multidex.MultiDexApplication;
+import android.content.Context;
 import android.text.TextUtils;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,11 +36,11 @@ public class AppController extends MultiDexApplication {
         return mRequestQueue;
     }
 
-    public boolean isRejectTurnGPSOn(){
+    public boolean isRejectTurnGPSOn() {
         return isRejectTurnGPSOn;
     }
 
-    public void setRejectTurnGPSOn(boolean enable){
+    public void setRejectTurnGPSOn(boolean enable) {
         this.isRejectTurnGPSOn = enable;
     }
 
@@ -55,5 +58,10 @@ public class AppController extends MultiDexApplication {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
