@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "767007901819",
+    "firebase_url": "https://gothic-avenue-206108.firebaseio.com",
+    "project_id": "gothic-avenue-206108",
+    "storage_bucket": "gothic-avenue-206108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767007901819:android:bb35cda0aa01cb35",
+        "android_client_info": {
+          "package_name": "com.shadyboshra2012.android.alarmthere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767007901819-i45bil9m5i86lgkq7cgoha2phounpvj7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadyboshra2012.android.alarmthere",
+            "certificate_hash": "fa912b5e5d9ce5590e80ea1950514e9c1ca1f009"
+          }
+        },
+        {
+          "client_id": "767007901819-7ivld5u1gu3vlh4tdaakuafvt6ika854.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadyboshra2012.android.alarmthere",
+            "certificate_hash": "19ec9eb925550eee6e02dea6c3ccb1a46212e1b9"
+          }
+        },
+        {
+          "client_id": "767007901819-9bg0rc21ar9lqj5aah8imbs1c1hdmi1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKqRWIM-V_QJTwYY1b3-n7fBTugfzH5Qg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767007901819-9bg0rc21ar9lqj5aah8imbs1c1hdmi1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-3320602227796002~6302509110"
+    }
+  ],
+  "configuration_version": "1"
+}
