@@ -838,6 +838,7 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
 
     private void loadNearByPlaces(double latitude, double longitude) {
         mPossibleLocations.clear();
+        Log.e(TAG, "Load Places");
         //locationsLayout.setVisibility(View.GONE);
 
         //YOU Can change this type at your own will, e.g hospital, cafe, restaurant.... and see how it all works
@@ -850,7 +851,7 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&language=").append(LOCALE_LANGUAGE);
         googlePlacesUrl.append("&key=" + GOOGLE_BROWSER_API_KEY);
-
+        Log.e(TAG, googlePlacesUrl.toString());
         JsonObjectRequest request = new JsonObjectRequest(googlePlacesUrl.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -874,6 +875,7 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
         try {
             JSONArray jsonArray = result.getJSONArray("results");
 
+            Log.e(TAG, result.getString(STATUS));
             if (result.getString(STATUS).equalsIgnoreCase(OK)) {
                 scrollMap(-200, 0, 200);
 
@@ -921,6 +923,8 @@ public class NewAlarmActivity extends FragmentActivity implements OnMapReadyCall
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG, "parseLocationResult: Error=" + e.getMessage());
+        } catch (Exception ex){
+            Log.e(TAG, "Exception: Error=" + ex.getMessage());
         }
     }
 }
